@@ -5,38 +5,73 @@ var generateBtn = document.querySelector("#generate");
 function writePassword() {
   //user enters how long password should be and what characters they want to use
   var howMany = prompt('How may characters would you like your password to be? (value between 8-25)');
-  var wantLower = prompt('Do you want to use lower case letters?(yes or no)');
-  var wantUpper = prompt('Do you want to use upper case letters? (yes or no)');
-  var wantNumbers = prompt('Do you want to use numbers? (yes or no)');
-  var wantSpecial = prompt('Do you want to use special characters? (yes or no)');
+  console.log('howMany:', howMany)
+
+  var wantLower = prompt('Do you want to use lower case letters?').toLowerCase();
+  var wantUpper = prompt('Do you want to use upper case letters?').toLowerCase();
+  var wantNumbers = prompt('Do you want to use numbers?').toLowerCase();
+  var wantSpecial = prompt('Do you want to use special characters?').toLowerCase();
   var lowerCase = ("abcdefghijklmnopqrstuvwxyz");
   var upperCase = ("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
   var numbers = ("0123456789");
   var specialChar = ("!#$%&'()*+,-./:;<=>?@[\]^_`{|}~");
-  var newString = ""
+  var newString = '';
 
-  //use if then to figure out which strings to concatenate
-
-  if (wantLower) {
+  //use if statements to figure out which strings to concatenate
+  if (wantLower === 'yes') {
     newString = lowerCase
-  } else if (wantLower && wantUpper) {
+  }
+  if (wantUpper === 'yes') {
+    newString = upperCase
+  }
+  if (wantNumbers === 'yes') {
+    newString = numbers
+  }
+  if (wantSpecial === 'yes') {
+    newString = specialChar
+  }
+  if (wantLower === 'yes' && wantUpper === 'yes') {
     newString = lowerCase.concat(upperCase)
-  } else if (wantLower && wantUpper && wantNumbers) {
+  }
+  if (wantLower === 'yes' && wantNumbers === 'yes') {
+    newString = lowerCase.concat(numbers)
+  }
+  if (wantLower === 'yes' && wantSpecial === 'yes') {
+    newString = lowerCase.concat(specialChar)
+  }
+  if (wantUpper === 'yes' && wantNumbers === 'yes') {
+    newString = upperCase.concat(numbers)
+  }
+  if (wantUpper === 'yes' && wantSpecial === 'yes') {
+    newString = upperCase.concat(specialChar)
+  }
+  if (wantNumbers === 'yes' && wantSpecial === 'yes') {
+    newString = numbers.concat(specialChar)
+  }
+  if (wantLower === 'yes' && wantUpper === 'yes' && wantNumbers === 'yes'){
     newString = lowerCase.concat(upperCase, numbers)
-  } else if (wantLower && wantUpper && wantNumbers && wantSpecial) {
+  }
+  if (wantLower === 'yes' && wantUpper === 'yes' && wantSpecial === 'yes'){
+    newString = lowerCase.concat(upperCase, specialChar)
+  }
+  if (wantLower === 'yes' && wantSpecial === 'yes' && wantNumbers === 'yes'){
+    newString = lowerCase.concat(specialChar, numbers)
+  }
+  if (wantUpper === 'yes' && wantSpecial === 'yes' && wantNumbers === 'yes'){
+    newString = upperCase.concat(specialChar, numbers)
+  }
+  if (wantLower === 'yes' && wantUpper === 'yes' && wantNumbers === 'yes' && wantSpecial === 'yes'){
     newString = lowerCase.concat(upperCase, numbers, specialChar)
   }
   
-  //generate password that is the number of characters the user enters using the correct characters
-  //join strings depending on what user picks and then randomly pick from there
-
+  console.log('newString:', newString)
 
   //use for loop to pull random characters a specific amt of times (how Many)
 
-  // for (var i = 0; i < howMany; i++) {
-  //   var password = Math.floor((Math.random() * newString.length[i];  //add a variable to the password
-    
-  // }
+  for (var i = 0; i < howMany; i++) {
+    var password = newString[Math.floor(Math.random() * newString.length)]; 
+    console.log('password:', password)
+  }
 
   var passwordText = document.querySelector("#password");
   passwordText.value = password;
@@ -44,3 +79,7 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
+
+//questions
+//1. is there a dryer way to write the if statements?
+//2. how do I get the password to show all characters and not just last one?
