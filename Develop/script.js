@@ -16,6 +16,7 @@ function writePassword() {
   var numbers = ("0123456789");
   var specialChar = ("!#$%&'()*+,-./:;<=>?@[\]^_`{|}~");
   var newString = '';
+  var password = '';
 
   //use if statements to figure out which strings to concatenate
   if (wantLower === 'yes') {
@@ -69,17 +70,13 @@ function writePassword() {
   //use for loop to pull random characters a specific amt of times (how Many)
 
   for (var i = 0; i < howMany; i++) {
-    var password = newString[Math.floor(Math.random() * newString.length)]; 
-    console.log('password:', password)
+    password += newString[Math.floor(Math.random() * newString.length)]; 
   }
 
+  console.log('password:', password)
   var passwordText = document.querySelector("#password");
   passwordText.value = password;
 }
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
-
-//questions
-//1. is there a dryer way to write the if statements?
-//2. how do I get the password to show all characters and not just last one?
